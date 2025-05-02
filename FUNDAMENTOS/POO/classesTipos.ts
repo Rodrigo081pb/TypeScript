@@ -9,7 +9,7 @@ abstract class Conta {
         this.numeroConta = numeroConta
     }
 
-    // Métodos usando arrow function (característica do TypeScript)
+    // Métodos usando arrow function
     depositar = () => {
         console.log("Você depositou")
     }
