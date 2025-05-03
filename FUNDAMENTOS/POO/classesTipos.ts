@@ -1,38 +1,13 @@
-// Classe abstrata que representa uma conta bancária
-abstract class Conta {
-    nome: string
-    numeroConta: number
-    saldo: number = 0  // Valor inicial do saldo
+import { CompanyAccount } from './class/CompanyAccount'
+import { PeapleAccount } from './class/PeapleAccount'
 
-    constructor(nome: string, numeroConta: number) {
-        this.nome = nome
-        this.numeroConta = numeroConta
-    }
+const peapleAccount: PeapleAccount = new PeapleAccount(679, 'Rodrigo', 19)
 
-    // Métodos usando arrow function
-    depositar = () => {
-        console.log("Você depositou")
-    }
+console.log(peapleAccount)
+peapleAccount.setName("Rodrigo Brayan")
 
-    sacar = () => {
-        console.log("Você sacou")
-    }
+console.log(peapleAccount)
+console.log(peapleAccount.getName())
 
-    getValue = () => {
-        console.log(this.saldo)
-    }
-}
-
-// Subclasse que herda de Conta
-class contaAll extends Conta {
-    doc_id: number  // Novo atributo específico da subclasse
-    
-    constructor(doc_id: number, nome: string, numeroConta: number) {
-        super(nome, numeroConta)  // Chama o construtor da classe pai
-        this.doc_id = doc_id
-    }
-}
-
-// Criando instância da contaAll
-const geralConta: contaAll = new contaAll(10, "Rodrigo", 13)
-console.log(geralConta)
+const companyAccount: CompanyAccount = new CompanyAccount('Rodrigo Dev', 20)
+console.log(companyAccount.deposit())
