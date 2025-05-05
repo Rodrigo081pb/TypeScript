@@ -1,9 +1,9 @@
-import './Header.css'
+import './Header.css';
 
 export const Header = () => {
-    return (
-        <div className='header'>
-            Header
-        </div>
-    )
-}
+  return (
+    <header className='header'>
+      <h1>Sua Plataforma</h1>
+    </header>
+  );
+};
