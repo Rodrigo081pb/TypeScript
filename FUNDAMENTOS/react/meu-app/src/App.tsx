@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
-import { Layout } from './components/Layout';
+// import { Layout } from './components/Layout'; 
 import { login } from './services/Login';
 
 const Background = styled.div`
@@ -40,7 +40,7 @@ const Title = styled.h1`
 `;
 
 const Label = styled.label`
-  font-size: 0.9rem;
+  font-size: 1rem;
   color: #fff;
 `;
 
@@ -48,12 +48,12 @@ const Input = styled.input`
   padding: 12px;
   border: none;
   border-radius: 10px;
-  background: rgba(255, 255, 255, 0.2);
+  background: rgba(137, 186, 206, 0.82);
   color: white;
   outline: none;
 
   ::placeholder {
-    color: #ddd;
+    color: white;
   }
 `;
 
@@ -84,6 +84,10 @@ const FooterText = styled.p`
 `;
 
 function App() {
+
+  const [ email, setEmail ] = useState('')
+  console.log("Email informado",email)
+
   return (
     //<Layout>
       <Background>
@@ -91,16 +95,19 @@ function App() {
           <Title>Login</Title>
 
           <Label htmlFor="email">Email</Label>
-          <Input type="email" id="email" placeholder="Digite seu email" />
+          <Input type="email" id="email" value={email} onChange={(event) => setEmail(event.target.value)}
+          
+          placeholder="Digite seu email" />
 
           <Label htmlFor="password">Senha</Label>
           <Input type="password" id="password" placeholder="Digite sua senha" />
 
-          <Button onClick={login}>Entrar</Button>
+          <Button onClick={() => login(email)}>Entrar</Button>
 
           <FooterText>
             Não tem uma conta? <a>Registrar</a>
           </FooterText>
+
         </GlassCard>
       </Background>
     //</Layout>
