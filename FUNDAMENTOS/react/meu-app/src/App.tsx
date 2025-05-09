@@ -93,15 +93,17 @@ const FooterText = styled.p`
 function App() {
 
   const [ email, setEmail ] = useState<string>('')
+  const [ password, setPassword ] = useState<string>('');
 
   const [ userData, setUserData ] = useState<null | userData>()
   
+
 
   useEffect(() => {
     const getData = async () => {
       const data: any | userData = await api
       setUserData(data)
-      // console.log(data)
+      alert("Informações carregadas")
     }
 
     getData()
@@ -114,6 +116,12 @@ function App() {
     //<Layout>
       <Background>
         <GlassCard>
+
+          {
+            userData === null || userData === undefined &&
+            <h1>Carregando informações da promisse...</h1>
+          }
+        
           <Title>Login</Title>
 
           <Label htmlFor="email">Email</Label>
@@ -122,7 +130,7 @@ function App() {
           placeholder="Digite seu email" />
 
           <Label htmlFor="password">Senha</Label>
-          <Input type="password" id="password" placeholder="Digite sua senha" />
+          <Input type="password" id="password" value={password} onChange={(e) => setPassword(e.target.value)} placeholder="Digite sua senha" />
 
           <Button onClick={() => login(email)}>Entrar</Button>
 
