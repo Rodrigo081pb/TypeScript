@@ -121,6 +121,17 @@ function App() {
             userData === null || userData === undefined &&
             <h1>Carregando informações da promisse...</h1>
           }
+
+          {/* O exemplo acima consegue descrever bastante porém o uso tambem poderia ser conforme abaixo. sobre o uso
+          da Renderização condicional do React :
+
+            {
+              userData === null || userData === undefined ?
+              <h1>Loading</h1> : <- esses dois pontos seria o else.
+              <p>Promisse carregada</p>
+            }
+
+          */}
         
           <Title>Login</Title>
 
