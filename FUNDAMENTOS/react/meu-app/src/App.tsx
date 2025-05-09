@@ -1,7 +1,14 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 // import { Layout } from './components/Layout'; 
 import { login } from './services/Login';
+import { api } from './api'
+
+interface userData {
+  email:string;
+  password: string;
+  name: string;
+}
 
 const Background = styled.div`
   position: fixed;
@@ -85,8 +92,23 @@ const FooterText = styled.p`
 
 function App() {
 
-  const [ email, setEmail ] = useState('')
-  console.log("Email informado",email)
+  const [ email, setEmail ] = useState<string>('')
+
+  const [ userData, setUserData ] = useState<null | userData>()
+  
+
+  useEffect(() => {
+    const getData = async () => {
+      const data: any | userData = await api
+      setUserData(data)
+      // console.log(data)
+    }
+
+    getData()
+
+  }, [])
+
+  console.log(userData)
 
   return (
     //<Layout>
