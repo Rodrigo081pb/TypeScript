@@ -1,23 +1,23 @@
-import React, { useState, useEffect } from 'react';
-import { login } from './services/Login';
-import { api } from './api';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Home from './pages/Home';
-import Conta from './components/Card/Conta';
+import Conta from './pages/Conta';
+import { Layout } from './components/Layout';
 
 function App() {
   return (
     <BrowserRouter>
-      <Routes>
-        <Route
-          path="/"
-          element={<Home/>}
-        />
-        <Route
-          path="/conta"
-          element={<Conta/>}
-        />
-      </Routes>
+      <Layout>
+        <Routes>
+          <Route
+            path="/"
+            element={<Home />}
+          />
+          <Route
+            path="/conta"
+            element={<Conta />}
+          />
+        </Routes>
+      </Layout>
     </BrowserRouter>
   );
 }
