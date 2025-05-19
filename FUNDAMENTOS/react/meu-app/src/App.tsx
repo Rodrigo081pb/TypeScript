@@ -1,34 +1,14 @@
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import Home from './pages/Home';
-import Conta from './pages/Conta';
+import { BrowserRouter} from 'react-router-dom';
 import { Layout } from './components/Layout';
-import ContaInfo from './pages/ContaInfo';
 import { AppContextProvider } from './components/AppContext';
-
-
+import MainRoutes from './route';
 
 function App() {
   return (
     <BrowserRouter>
       <AppContextProvider>
         <Layout>
-          <Routes>
-            <Route
-              path="/"
-              element={<Home />}
-            />
-            <Route
-              path="/conta/:id"
-              element={<Conta />}
-            />
-
-            <Route
-              path='/infoconta'
-              element={<ContaInfo />}
-            >
-            </Route>
-
-          </Routes>
+          <MainRoutes/>
         </Layout>
       </AppContextProvider>
     </BrowserRouter>

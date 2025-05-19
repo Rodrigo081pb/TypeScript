@@ -1,8 +1,8 @@
-import React, { MouseEventHandler, useContext, useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { login } from '../services/Login';
 import { api } from '../api';
-import { Link, Navigate, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { AppContext } from '../components/AppContext';
 
 const Background = styled.div`
@@ -101,15 +101,17 @@ function Home() {
     getData();
   }, []);
 
+  const { setIsLoggedIn } = useContext(AppContext)
+  const navigate = useNavigate()
+  
+
+
   const validateUser = async (email: string) => {
 
     const loggedIn = await login(email)
-    const { setIsLoggedIn } = useContext(AppContext)
-    const navigate = useNavigate()
-    
 
     if(!loggedIn){
-      alert('Email inválido')
+      return alert('Email inválido')
     }
 
     setIsLoggedIn(true)
@@ -144,9 +146,6 @@ function Home() {
           placeholder="Digite sua senha"
         />
 
-        <Link to='/conta/1'>
-          logar
-        </Link>
         <Button onClick={() => validateUser(email)}>Entrar</Button>
 
       </GlassCard>
