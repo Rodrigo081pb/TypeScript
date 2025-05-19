@@ -1,8 +1,9 @@
-import React, { useEffect, useState } from 'react';
+import React, { MouseEventHandler, useContext, useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { login } from '../services/Login';
 import { api } from '../api';
-import { Link } from 'react-router-dom';
+import { Link, Navigate, useNavigate } from 'react-router-dom';
+import { AppContext } from '../components/AppContext';
 
 const Background = styled.div`
   position: fixed;
@@ -83,7 +84,7 @@ function Home() {
   const [email, setEmail] = useState<string>('');
 
   const [password, setPassword] = useState<string>('');
-  
+
   const [userData, setUserData] = useState<null | UserData>(null);
 
   useEffect(() => {
@@ -99,6 +100,22 @@ function Home() {
 
     getData();
   }, []);
+
+  const validateUser = async (email: string) => {
+
+    const loggedIn = await login(email)
+    const { setIsLoggedIn } = useContext(AppContext)
+    const navigate = useNavigate()
+    
+
+    if(!loggedIn){
+      alert('Email inválido')
+    }
+
+    setIsLoggedIn(true)
+    navigate('/conta/1')
+
+  }
 
   return (
     <Background>
@@ -130,8 +147,8 @@ function Home() {
         <Link to='/conta/1'>
           logar
         </Link>
-        <Button onClick={() => login(email)}>Entrar</Button>
-      
+        <Button onClick={() => validateUser(email)}>Entrar</Button>
+
       </GlassCard>
     </Background>
   );

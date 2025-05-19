@@ -1,19 +1,14 @@
-import { useContext } from "react"
 import { api } from "../api"
-import { AppContext } from "../components/AppContext"
 
-export const login = async(email: string): Promise<void> => {
-
-    const { isLoggedIn } = useContext(AppContext)
-    console.log(isLoggedIn)
-
+export const login = async(email: string): Promise<boolean> => {
+    
     const data: any = await api
     
     if(email !== data.email){
-        return alert('Email inválido')
+        return false
     }
 
-    alert("Bem vindo")
+    return true
 
 }
 
