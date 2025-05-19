@@ -2,6 +2,7 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Home from './pages/Home';
 import Conta from './pages/Conta';
 import { Layout } from './components/Layout';
+import ContaInfo from './pages/ContaInfo';
 
 function App() {
   return (
@@ -13,9 +14,16 @@ function App() {
             element={<Home />}
           />
           <Route
-            path="/conta"
+            path="/conta/:id"
             element={<Conta />}
           />
+
+          <Route
+          path='/infoconta'
+          element={<ContaInfo/>}
+          >
+          </Route>
+
         </Routes>
       </Layout>
     </BrowserRouter>

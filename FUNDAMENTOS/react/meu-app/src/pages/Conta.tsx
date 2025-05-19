@@ -1,6 +1,8 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import { useParams, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import CardInfo from '../components/Card/CardInfo';
+import { api } from '../api';
 
 const Background = styled.div`
   width: 100vw;
@@ -38,23 +40,57 @@ interface UserData {
     password: string;
     name: string;
     balance: number;
+    id: string;
 }
 
 const Conta = () => {
 
     const [userData, setUserData] = useState<null | UserData>(null);
 
+    useEffect(() => {
+        const getData = async () => {
+            try {
+                const data: any | UserData = await api;
+                setUserData(data);
+                alert('Informações carregadas');
+            } catch (error) {
+                console.error('Erro ao carregar dados:', error);
+            }
+        };
+
+        getData();
+    }, []);
+
+    const actualData = new Date()
+
+    const { id } = useParams()
+    const navigate = useNavigate()
+
+    if (userData && id !== userData.id) {
+        navigate('/')
+    }
+
     return (
         <Background>
             <Card>
-                <Section>
-                    <CardInfo text="Informações de Acesso" />
-                </Section>
-                <Section>
-                    <CardInfo text="Informações da Conta" />
-                </Section>
+
+                {
+                    userData === undefined || userData === null ?
+                        (
+                            <h1>Usuário não definido</h1>
+                        ):
+                        (
+                            <>
+                                <Section>
+                                    <CardInfo MainContent = "Informações de Acesso"  content = {`Bem vindo ${userData?.name}`}/>
+                                    <CardInfo MainContent= "Informações da Conta" content = {`Seu saldo é de R$${userData?.balance} ||  ${actualData.getDate()}/${actualData.getMonth()}/${actualData.getFullYear()} `} />
+                                </Section>
+                            </>
+                        )
+                }
+
             </Card>
-        </Background>
+        </Background >
     );
 };
 

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { login } from '../services/Login';
 import { api } from '../api';
+import { Link } from 'react-router-dom';
 
 const Background = styled.div`
   position: fixed;
@@ -135,6 +136,9 @@ function Home() {
           placeholder="Digite sua senha"
         />
 
+        <Link to='/conta/1'>
+          logar
+        </Link>
         <Button onClick={() => login(email)}>Entrar</Button>
 
         <FooterText>

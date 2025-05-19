@@ -12,13 +12,22 @@ const Description = styled.p`
 `;
 
 interface ICardInfo {
-    text: string
+    MainContent: string,
+    content: string
 }
 
-const CardInfo = ({text}: ICardInfo ) => {
+const CardInfo = ({MainContent, content}: ICardInfo ) => {
   return (
     <>
-      <Title>{ text }</Title>
+    
+      <Title>
+        { MainContent }
+      </Title>
+      
+      <Description>
+        { content }
+      </Description>
+
     </>
   );
 };
