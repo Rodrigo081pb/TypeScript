@@ -1,8 +1,9 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import CardInfo from '../components/Card/CardInfo';
 import { api } from '../api';
+import { AppContext } from '../App';
 
 const Background = styled.div`
   width: 100vw;
@@ -46,6 +47,9 @@ interface UserData {
 const Conta = () => {
 
     const [userData, setUserData] = useState<null | UserData>(null);
+
+    const context = useContext(AppContext)
+    console.log(context)
 
     useEffect(() => {
         const getData = async () => {
