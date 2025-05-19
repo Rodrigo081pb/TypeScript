@@ -72,18 +72,6 @@ const Button = styled.button`
   }
 `;
 
-const FooterText = styled.p`
-  text-align: center;
-  font-size: 0.8rem;
-  margin-top: 10px;
-
-  a {
-    color: #fff;
-    text-decoration: underline;
-    cursor: pointer;
-  }
-`;
-
 interface UserData {
   email: string;
   password: string;
@@ -91,8 +79,11 @@ interface UserData {
 }
 
 function Home() {
+
   const [email, setEmail] = useState<string>('');
+
   const [password, setPassword] = useState<string>('');
+  
   const [userData, setUserData] = useState<null | UserData>(null);
 
   useEffect(() => {
@@ -140,10 +131,7 @@ function Home() {
           logar
         </Link>
         <Button onClick={() => login(email)}>Entrar</Button>
-
-        <FooterText>
-          Não tem uma conta? <a>Registrar</a>
-        </FooterText>
+      
       </GlassCard>
     </Background>
   );

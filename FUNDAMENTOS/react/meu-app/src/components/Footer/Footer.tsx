@@ -1,7 +1,7 @@
 export const Footer = () => {
     return (
         <div>
-            Footer
+            Não tem uma conta? <a>Registrar</a>
         </div>
     )
 }

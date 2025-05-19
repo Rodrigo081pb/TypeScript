@@ -3,7 +3,7 @@ import { useParams, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import CardInfo from '../components/Card/CardInfo';
 import { api } from '../api';
-import { AppContext } from '../App';
+import { AppContext } from '../components/AppContext';
 
 const Background = styled.div`
   width: 100vw;
@@ -47,9 +47,13 @@ interface UserData {
 const Conta = () => {
 
     const [userData, setUserData] = useState<null | UserData>(null);
+    const { id } = useParams()
+    const navigate = useNavigate()
 
-    const context = useContext(AppContext)
-    console.log(context)
+    const { isLoggedIn } = useContext(AppContext)
+
+
+    !isLoggedIn && navigate('/')
 
     useEffect(() => {
         const getData = async () => {
@@ -67,8 +71,6 @@ const Conta = () => {
 
     const actualData = new Date()
 
-    const { id } = useParams()
-    const navigate = useNavigate()
 
     if (userData && id !== userData.id) {
         navigate('/')

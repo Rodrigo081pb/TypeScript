@@ -3,23 +3,9 @@ import Home from './pages/Home';
 import Conta from './pages/Conta';
 import { Layout } from './components/Layout';
 import ContaInfo from './pages/ContaInfo';
-import { createContext } from 'react';
+import { AppContextProvider } from './components/AppContext';
 
-interface IAppContext {
-  user:string;
-}
 
-export const AppContext = createContext({} as IAppContext) 
-
-const AppContextProvider = ({children}: any) => {
-  const user = 'rodrigo'
-
-  return(
-    <AppContext value = {{ user }} >
-      {children}
-    </AppContext>
-  )
-}
 
 function App() {
   return (
