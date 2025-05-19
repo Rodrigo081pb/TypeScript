@@ -1,4 +1,4 @@
-import { createContext } from "react";
+import { createContext, useState } from "react";
 
 interface IAppContext {
   user:string;
@@ -8,12 +8,15 @@ interface IAppContext {
 export const AppContext = createContext({} as IAppContext) 
 
 export const AppContextProvider = ({children}: any) => {
+  
+  const [ isLoggedIn ] = useState<boolean>(false)
+  
   const user = 'rodrigo'
-  const isLoggedIn = false
 
   return(
     <AppContext value = {{ user, isLoggedIn }} >
       {children}
     </AppContext>
   )
+  
 }

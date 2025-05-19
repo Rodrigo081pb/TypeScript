@@ -1,5 +1,15 @@
+import { useContext } from "react"
 import { login } from "./Login"
-import { api } from "../api"
+
+const mockSetIsLoggedIn = jest.fn()
+const mockNavigate = jest.fn()
+
+jest.mock('react', () => ({
+    ...jest.requireActual('react'),
+    useContext: () => ({
+        isLoggedIn:true
+    })
+}))
 
 describe('login realizado', () => {
 
@@ -10,16 +20,13 @@ describe('login realizado', () => {
 
     it('Alert Boas vindas', async() => {
         await login(MockEmail)
-        expect(Mock).toHaveBeenCalledWith('Bem vindo rodrigo@gmail.com')
-    })
-
-    it("Não deve exibir alerta de boas vindas sem o e-mail", async() => {
-        await login(MockEmail)
-        expect(Mock).not.toHaveBeenCalledWith('Bem vindo!')
+        expect(mockSetIsLoggedIn).toHaveBeenCalledWith(true)
+        expect(mockNavigate).toHaveBeenLastCalledWith('/1')
     })
 
     it('Deve exibir um erro caso o email seja invalido', async() => {
         await login('email@invalido')
+        expect(mockSetIsLoggedIn).not.toHaveBeenCalledWith()
         expect(Mock).toHaveBeenLastCalledWith("Email inválido")
     })
 
