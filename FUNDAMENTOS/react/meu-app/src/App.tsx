@@ -1,4 +1,4 @@
-import { BrowserRouter} from 'react-router-dom';
+import { BrowserRouter } from 'react-router-dom';
 import { Layout } from './components/Layout';
 import { AppContextProvider } from './components/AppContext';
 import MainRoutes from './route';
@@ -6,14 +6,13 @@ import { createLocalStorage, getAllLocalStorage } from './services/storage';
 
 function App() {
 
-  createLocalStorage();
-  console.log(getAllLocalStorage())
+  !getAllLocalStorage() && createLocalStorage()
 
   return (
     <BrowserRouter>
       <AppContextProvider>
         <Layout>
-          <MainRoutes/>
+          <MainRoutes />
         </Layout>
       </AppContextProvider>
     </BrowserRouter>

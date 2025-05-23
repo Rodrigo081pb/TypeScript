@@ -4,6 +4,7 @@ import { login } from '../services/Login';
 import { api } from '../api';
 import { useNavigate } from 'react-router-dom';
 import { AppContext } from '../components/AppContext';
+import { changeLocalStorage } from '../services/storage';
 
 const Background = styled.div`
   position: fixed;
@@ -115,6 +116,7 @@ function Home() {
     }
 
     setIsLoggedIn(true)
+    changeLocalStorage({login: true})
     navigate('/conta/1')
 
   }
