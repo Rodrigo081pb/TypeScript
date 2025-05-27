@@ -1,4 +1,3 @@
-import { UserService } from "../services/UserService"
 import { UserController } from "./UserController"
 import { makeMockResponse } from "../__mocks__/mockResponse.mock";
 import { Request } from "express"
@@ -10,15 +9,12 @@ const mockUserService = {
 jest.mock('../services/UserService', () =>{
     return{
         UserService: jest.fn().mockImplementation(() =>{
-            return{
-                mockUserService
-            }
+            return mockUserService
         })
     }
 })
 
 describe('UserController', () => {
-
 
 
     const userController = new UserController();
@@ -49,7 +45,7 @@ describe('UserController', () => {
 
         userController.createUser(mockRequest, mockResponse)
         expect(mockResponse.state.status).toBe(400)
-        expect(mockResponse.state.json).toMatchObject({ message: 'bad request: nome e senha e email obrigatório' })
+        expect(mockResponse.state.json).toMatchObject({ message: 'bad request: Todos os campos são obrigatórios' })
     })
 
     it('Deve retornar um erro caso o usuário não informar o email', ()=>{
@@ -63,7 +59,7 @@ describe('UserController', () => {
 
         userController.createUser(mockRequest, mockResponse)
         expect(mockResponse.state.status).toBe(400)
-        expect(mockResponse.state.json).toMatchObject({ message: 'bad request: nome e senha e email obrigatório' })
+        expect(mockResponse.state.json).toMatchObject({ message: 'bad request: Todos os campos são obrigatórios' })
     })
 
         it('Deve retornar um erro caso o usuário não informar a senha', ()=>{
@@ -77,7 +73,7 @@ describe('UserController', () => {
 
         userController.createUser(mockRequest, mockResponse)
         expect(mockResponse.state.status).toBe(400)
-        expect(mockResponse.state.json).toMatchObject({ message: 'bad request: nome e senha e email obrigatório' })
+        expect(mockResponse.state.json).toMatchObject({ message: 'bad request: Todos os campos são obrigatórios' })
     })
 
 

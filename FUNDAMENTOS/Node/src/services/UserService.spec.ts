@@ -13,7 +13,7 @@ describe('UserService', () => {
 
     it('Deve adicionar um novo usuário', async () => {
         mockUserRepository.createUser = jest.fn().mockImplementation(() => Promise.resolve({
-            user_id: '222',
+            id_user: '222',
             name: 'nome',
             email: 'rodrigo@gmail.com',
             password: 'senha'
@@ -22,7 +22,7 @@ describe('UserService', () => {
         expect(mockUserRepository.createUser).toHaveBeenCalled()
         expect(response).toMatchObject(
             {
-                user_id: '222',
+                id_user: '222',
                 name: 'nome',
                 email: 'rodrigo@gmail.com',
                 password: 'senha'
