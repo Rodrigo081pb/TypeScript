@@ -1,14 +1,16 @@
 import { UserController } from "./UserController"
 import { makeMockResponse } from "../__mocks__/mockResponse.mock";
 import { Request } from "express"
+import { makeMockRequest } from "../__mocks__/mockRequest.mock";
 
 const mockUserService = {
-    createUser:jest.fn()
+    createUser: jest.fn(),
+    getUser: jest.fn()
 }
 
-jest.mock('../services/UserService', () =>{
-    return{
-        UserService: jest.fn().mockImplementation(() =>{
+jest.mock('../services/UserService', () => {
+    return {
+        UserService: jest.fn().mockImplementation(() => {
             return mockUserService
         })
     }
@@ -33,13 +35,13 @@ describe('UserController', () => {
         expect(mockResponse.state.status).toBe(201)
         expect(mockResponse.state.json).toMatchObject({ message: 'Usuário criado' })
     })
-    
-    it('Deve retornar um erro caso o usuário não informar o nome', ()=>{
-        const mockRequest={
-            body:{
-                name:'',
-                email:'Rodrigo@gmail.com',
-                password:'senha'
+
+    it('Deve retornar um erro caso o usuário não informar o nome', () => {
+        const mockRequest = {
+            body: {
+                name: '',
+                email: 'Rodrigo@gmail.com',
+                password: 'senha'
             }
         } as Request
 
@@ -48,12 +50,12 @@ describe('UserController', () => {
         expect(mockResponse.state.json).toMatchObject({ message: 'bad request: Todos os campos são obrigatórios' })
     })
 
-    it('Deve retornar um erro caso o usuário não informar o email', ()=>{
-        const mockRequest={
-            body:{
-                name:'Rodrigo',
-                email:'',
-                password:'senha'
+    it('Deve retornar um erro caso o usuário não informar o email', () => {
+        const mockRequest = {
+            body: {
+                name: 'Rodrigo',
+                email: '',
+                password: 'senha'
             }
         } as Request
 
@@ -62,12 +64,12 @@ describe('UserController', () => {
         expect(mockResponse.state.json).toMatchObject({ message: 'bad request: Todos os campos são obrigatórios' })
     })
 
-        it('Deve retornar um erro caso o usuário não informar a senha', ()=>{
-        const mockRequest={
-            body:{
-                name:'Rodrigo',
-                email:'Rodrigo@gmail.com',
-                password:''
+    it('Deve retornar um erro caso o usuário não informar a senha', () => {
+        const mockRequest = {
+            body: {
+                name: 'Rodrigo',
+                email: 'Rodrigo@gmail.com',
+                password: ''
             }
         } as Request
 
@@ -76,5 +78,16 @@ describe('UserController', () => {
         expect(mockResponse.state.json).toMatchObject({ message: 'bad request: Todos os campos são obrigatórios' })
     })
 
+    it('Deve retornar o usuário com o userId informado', () => {
+        const mockRequest = makeMockRequest({
+            params: {
+                userId: '12345'
+            }
+        })
+
+        userController.getUser(mockRequest, mockResponse)
+        expect(mockUserService.getUser).toHaveBeenCalledWith('12345')
+        expect(mockResponse.state.status).toBe(200)
+    })
 
 })

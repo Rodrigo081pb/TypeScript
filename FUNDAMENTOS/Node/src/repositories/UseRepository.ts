@@ -20,11 +20,16 @@ export class UserRepository {
 
     // Busca um usuário pelo ID
     getUser = async (idUser: string): Promise<User | null> => {
-        return this.manager.findOne(User, {
+
+        const user = this.manager.findOne(User, {
             where: {
                 id_user: idUser
             }
         })
+
+        console.log(user)
+
+        return user;
     }
 
     // Busca um usuário pelo e-mail e senha

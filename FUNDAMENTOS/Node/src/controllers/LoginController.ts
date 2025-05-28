@@ -22,9 +22,12 @@ export class LoginController {
 
         const { email, password } = request.body;
 
-        const token = await this.userService.getToken(email, password);
+        try {
+            const token = await this.userService.getToken(email, password);
 
-        // Retorna o token como resposta
-        return response.status(200).json({ token });
+            return response.status(200).json({token})
+        } catch (error) {
+            return response.status(500).json({message: `Erro ao autenticar usuário', error: ${error}.message`});
+        }
     }
 }
